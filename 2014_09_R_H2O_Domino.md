@@ -1,7 +1,7 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.4*
+*version 0.5*
 
 <br><br>
 
@@ -46,7 +46,8 @@ To sum it up in very technical terms, R, H2O and Domino can happily talk to each
 
 1. Soil data on local machine - get yourself familiar with the H2O machine learning process
 2. Soil data on Domino - demonstrates how to perform the same analysis on Domino's free tier
-3. Higgs data on Domino - use higher Domino tiers to analyse big data
+3. Soil data on Domino - scale it up, run faster and test more models
+4. Higgs data on Domino - big data analysis
 
 <br><br>
 
@@ -233,13 +234,11 @@ xxx
 
 **************
 
-### Case Study Three: Let's Scale it up!! Analysing Higgs Data on Domino
+### Case Study Three: Let's Scale it up!! Run faster with Domino
 
-short paragraphs and code snippets:
+Use higher tiers for case study two. Make it run a lot faster.
 
-- importing and inspecting the full 11M-row Higgs data
-- building predictive models in realistic timescale (RF, GBM and DNN only)
-- discssuion on memory usage for each algorithm
+Test more models.
 
 <br><br>
 
@@ -260,6 +259,20 @@ xxx
 xxx
 
 <br><br>
+
+**************
+
+
+### Case Study Four: Analysing Big Data on Domino
+
+short paragraphs and code snippets:
+
+- importing and inspecting the full 11M-row Higgs data
+- building predictive models in realistic timescale (RF, GBM and DNN only)
+- discssuion on memory usage for each algorithm
+
+<br><br>
+
 
 **************
 
