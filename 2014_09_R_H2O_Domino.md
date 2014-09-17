@@ -1,13 +1,14 @@
 Using R, H2O and Domino for Real, Practical and Scalable Data Analysis
 ===============
 
-*version 0.6*
+*version 0.7*
 
-<br><br>
+<br>
+
 
 ### Introduction
 
-This blog post is the sequel to [TTTAR1 a.k.a. an introduction to H2O Deep Learning](http://bit.ly/bib_TTTAR1). If the previous blog post was a brief intro to H2O, this post is a proper machine learning case study based on a recent [Kaggle competition](https://www.kaggle.com/c/afsis-soil-properties). In short, I have (finally, yes, finally!) managed to achieve top performance for a real-world data mining contest by leveraging the power of R, H2O and Domino. 
+This blog post is the sequel to [TTTAR1 a.k.a. an introduction to H2O Deep Learning](http://bit.ly/bib_TTTAR1). If the previous blog post was a brief intro to H2O, this post is a proper machine learning case study based on a recent [Kaggle competition](https://www.kaggle.com/c/afsis-soil-properties). In short, I have (finally, yes, finally!) managed to achieve good performance for a real-world data mining contest by leveraging the power of R, H2O and Domino. 
 
 (screenshot here)
 
@@ -30,28 +31,278 @@ Brief intro here ...
 
 ### Quick Start - Running the Starter Code on Domino Cloud
 
-follow these steps ...
-
-based on the 'quick-start' project (every new Domino user will have this folder)
-
-screenshots ...
-
-Also check out these functions ...
+Intro ...
 
 <br><br>
+
+#### Step 1 - Sign up for a free Domino account
+
+URL here 
+(screenshot here)
+
+<br><br>
+
+#### Step 2 - Install Domino Client for your OS
+
+Install Client
+(screenshot here)
+
+<br><br>> domino.run("Kaggle_AfSIS_with_H2O.R")
+  Determining which files are out of date...
+
+No changes to upload to server, because you're up to date.
+Run for project woobe/quick-start started. You can view progress here: https://app.dominoup.com/woobe/quick-start#r/5419a889e4b062b695d962a9
+
+
+#### Step 3 - Go through the tutorial (Optional)
+
+(screenshot here)
+
+<br><br>
+
+
+#### Step 4 - Install and Load Domino's R Package
+
+```
+install.packages("domino")
+library(domino)
+```
+
+<br><br>
+
+#### Step 5 - Login 
+
+```
+domino.login("your_username", "your_password")
+```
+
+<br><br>
+
+
+#### Step 6 - Set working diectory to a folder of your choice
+
+```
+setwd("your_working_dir") 
+```
+
+<br><br>
+
+#### Step 7 - Download the "quick-start" Project
+
+```
+domino.get("quick-start")
+```
+
+After that, you should have the following files
+
+- results/
+- main.m
+- main.py
+- main.r
+
+<br><br>
+
+#### Step 8 - Upload the Kaggle AfSIS data and my R script
+
+Copy the data files and my R script to the folder
+
+- **data/train.zip**
+- **data/test.zip**
+- **data/sample_submission.csv**
+- results/
+- **Kaggle_AfSIS_with_H2O.R**
+- main.m
+- main.py
+- main.r
+
+```
+domino.upload()
+```
+
+<br><br>
+
+#### Step 9 - Check the files using Web UI
+
+(screenshot here)
+
+<br><br>
+
+#### Step 10 - Run the R Script (Two Options)
+
+Option 1 - Web UI
+
+(screenshot here)
+
+Option 2 - R
+
+```
+domino.run("Kaggle_AfSIS_with_H2O.R")
+```
+
+<br><br>
+
+
+#### Step 11 - Monitor the Process
+
+(screenshot here)
+
+<br><br>
+
+
+
+#### Step 12 - Download the Results
+
+Email notification
+
+(screenshot here)
+
+Option 1 - Web UI
+
+(screenshot here)
+
+Option 2 - R
+
+<br><br>
+
+
+#### Step 13 - Submit it to Kaggle
+
+
+(screenshot here)
+
+<br><br>
+
+#### Share your project folder
+
+(screenshot here)
+
+<br><br>
+
+#### Other Cool Stuff
+
+(screenshot here)
+
+<br><br>
+
 
 **************
 
 ### Dig Deeper - Using H2O Deep Learning for Soil Property Predictions
 
-In the previous section - Domino operations
+Intro ....
 
-This section - more about the data analysis and strategy
+<br><br>
+
+#### Step 1 - Install H2O
+
+CRAN Version
+```
+install.packages("h2o")
+```
+
+
+Bleeding Edge Version
+```
+## Specify H2O version here
+h2o_ver <- "1510"
+
+## Install H2O
+local({r <- getOption("repos"); r["CRAN"] <- "http://cran.us.r-project.org"; options(repos = r)})
+txt_repo <- (c(paste0(paste0("http://s3.amazonaws.com/h2o-release/h2o/master/",
+                             h2o_ver),"/R"),
+               getOption("repos")))
+install.packages("h2o", repos = txt_repo, quiet = TRUE)
+```
+
+<br><br>
+
+
+#### Step 2 - Initiate and Connect to a Local H2O Cluster on Domino
+
+```
+library(h2o)
+localH2O <- h2o.init(max_mem_size = '1g')
+
+```
+
+<br><br>
+
+#### Step 3 - Import Data
+
+```
+## Get the local path on Domino
+path_cloud <- getwd()
+
+## Define other paths
+path_train <- paste0(path_cloud, "/data/train.zip")
+path_test <- paste0(path_cloud, "/data/test.zip")
+path_submission <- paste0(path_cloud, "/data/sample_submission.csv")
+path_output <- paste0(path_cloud, "/results/my_Kaggle_submission.csv")
+
+## Import Data to H2O Cluster
+train_hex <- h2o.importFile(localH2O, path = path_train)
+test_hex <- h2o.importFile(localH2O, path = path_test)
+raw_sub <- read.csv(path_submission)
+
+```
+
+<br><br>
+
+#### Step 4 - Train a Deep Neural Networks model for each variable
+```
+## Split the dataset into 80:20 for training and validation
+train_hex_split <- h2o.splitFrame(train_hex, ratios = c(0.8, 0.199), shuffle = TRUE)
+
+## One Variable at at Time
+ls_label <- c("Ca", "P", "pH", "SOC", "Sand")
+
+for (n_label in 1:5) {
+
+  ## Display
+  cat("\n\nNow training a DNN model for", ls_label[n_label], "...\n")
+
+  ## Train a DNN
+  model <- h2o.deeplearning(x = 2:3595,
+                            y = (3595 + n_label),
+                            data = train_hex_split[[1]],
+                            validation = train_hex_split[[2]],
+                            activation = "Rectifier",
+                            hidden = c(50, 50, 50),
+                            epochs = 100,
+                            classification = FALSE,
+                            balance_classes = FALSE)
+
+  ## Print the Model Summary
+  print(model)
+
+  ## Use the model for prediction and store the results in submission template
+  raw_sub[, (n_label + 1)] <- as.matrix(h2o.predict(model, test_hex))
+
+}
+```
+
+<br><br>
+
+#### Step 5 - Save Results as a  CSV
+```
+write.csv(raw_sub, file = path_output, row.names = FALSE)
+```
+<br><br>
+
+
+#### H2O Machine Learning Algorithms
+
+NB, RF, GBM, GLM ... 
+
+<br><br>
+
+
+#### Other Key H2O Functions
+
 
 <br><br>
 
 **************
-
 
 ### Conclusions
 
@@ -91,7 +342,7 @@ This section - more about the data analysis and strategy
 
 ### Key Resources
 
-[Domino Online Help](http://help.dominoup.com/)
+all the links here
 
 <br><br>
 
