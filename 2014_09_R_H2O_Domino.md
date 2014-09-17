@@ -1,7 +1,7 @@
-Using R, H2O and Domino for Real, Practical and Scalable Data Analysis
+Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.7*
+*version 0.8*
 
 <br>
 
@@ -299,6 +299,45 @@ NB, RF, GBM, GLM ...
 
 #### Other Key H2O Functions
 
+
+<br><br>
+
+
+**************
+
+### Scaling it up! 
+
+Run your analysis faster with Domino
+
+- from 1 core to 32 cores
+- from 1GB Ram to 60GB Ram
+
+##### Step 1 - Change the Hardware Tier
+
+(screenshot here)
+
+
+##### Step 2 - Modify the R script slightly
+
+
+Allocate more memory for the H2O cluster
+```
+localH2O <- h2o.init(max_mem_size = '55g')
+```
+
+Go deeper with DNN
+```
+model <- h2o.deeplearning(...,
+                          hidden = c(1000, 1000, 1000),
+                          epochs = 1000,
+                          ...)
+```
+
+##### Multiple Instances!
+
+Try different settings at the same time
+
+(screenshot here)
 
 <br><br>
 
