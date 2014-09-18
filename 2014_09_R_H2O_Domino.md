@@ -1,7 +1,7 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.12*
+*version 0.13*
 
 <br>
 
@@ -37,8 +37,9 @@ I always believe that learning-by-doing is the best way to learn. So I have prep
 
 **The purpose of this post is not only about Kaggle competitions, it is more about finding a generic, robust, practical and scalable data analysis solution**. A solution that I can rely on and apply to many of my machine learning problems in life. My experience with this R + H2O + Domino combination in the last couple weeks has been very promising. So I would like to use this opportunity to share with you my experience. I realy hope that this post will encourage more data geeks out there to give R, H2O and Domino a try if they haven't done so.
 
-<br><br>
+Ready? Here we go!
 
+<br>
 
 **************
 
@@ -49,7 +50,7 @@ Web UI and R interface. Although the R code is based on a Kaggle example using
 H2O, it is hard to learn two new things at the same time. So I will leave the 
 H2O machine learning discussion for the next section. 
 
-Ready? Let's go!
+
 
 <br>
 
@@ -58,8 +59,6 @@ Ready? Let's go!
 If you haven't done so, [sign up](update link) for a free account on the site, 
 download and install the [client](update link). If you aren’t sure how to do this, 
 you can follow their [quick-start guide](update link).
-
-<br>
 
 <center><img src="http://i.imgur.com/HAQkggc.png" alt="domino_website" style="width:700px"></center>
 
@@ -89,8 +88,6 @@ This tutorial is based on the Kaggle competition. In order to run the analysis,
 you will need to [download the original datasets](https://www.kaggle.com/c/afsis-soil-properties/data) 
 from Kaggle and this R script ("Kaggle_AfSIS_with_H2O.R")
 
-<br>
-
 <center><img src="http://i.imgur.com/cORfbVt.png" alt="kaggle_data" style="width:700px"></center>
 
 <br>
@@ -113,8 +110,6 @@ file structure should look like this:
 - main.py
 - main.r
 
-<br>
-
 **After**
 
 - **data / train.zip** (*note*: create a new 'data' folder)
@@ -128,17 +123,19 @@ file structure should look like this:
 
 <br>
 
+Set Working Directory to the 'quick-start' folder
 ```
-## Set Working Directory to the 'quick-start' folder
 setwd("quick_start_dir_on_your_local_drive") 
 ```
 
+<br?
+
+Upload new files to the 'quick-start' folder on Domino cloud
 ```
-## Upload new files to the 'quick-start' folder on Domino cloud
 domino.upload()
 ```
 
-<br><br>
+<br>
 
 
 #### Step 1.5 - Check the Files
@@ -146,11 +143,9 @@ domino.upload()
 Before running the analysis, check and make sure the files are on the cloud. 
 You can log into Domino's web UI and browse your files in the 'quick-start' folder.
 
-<br>
-
 <center><img src="http://i.imgur.com/PRpk7ws.png" alt="kaggle_files" style="width:700px"></center>
 
-<br><br>
+<br>
 
 
 
@@ -160,8 +155,6 @@ Great, you now are ready to run the analysis on the cloud!
 There are two ways to do this.
 
 You can use the Web UI to start a run (Runs -> Run -> Enter of the File Name-> Start Run).
-
-<br>
 
 <center><img src="http://i.imgur.com/s5V8XBr.png" alt="kaggle_startrun" style="width:700px"></center>
 
@@ -183,12 +176,9 @@ You can access to all your files and project settings panel on the left.
 When you click on any of your runs, it will display the native console 
 (R in this case) with a summary below showing CPU, memory usage and other stats.
 
-<br>
-
 <center><img src="http://i.imgur.com/sHyFswF.png" alt="kaggle_monitor" style="width:700px"></center>
 
 <br>
-
 
 
 #### Step 1.8 - Download the Results
@@ -197,16 +187,12 @@ By default, you will receive an email notification once the run has finished.
 There are more ways to customize notifcation but I will leave that for a future
 discussion (read more [here](update link) if you are interested).
 
-<br>
-
 <center><img src="http://i.imgur.com/gpHK8TK.png" alt="kaggle_monitor" style="width:700px"></center>
 
 <br>
 
 The analysis takes about half an hour. After that, you can download the 
 results (CSV for Kaggle submission) either from the Web UI ...
-
-<br>
 
 <center><img src="http://i.imgur.com/BYdgulM.png" alt="kaggle_monitor" style="width:700px"></center>
 
@@ -303,8 +289,6 @@ it is the maximum allowance of the Domino free tier.
 library(h2o)
 localH2O <- h2o.init(max_mem_size = '1g')
 ```
-
-<br>
 
 <center><img src="http://i.imgur.com/xvJFVzA.png" alt="h2o_version" style="width:700px"></center>
 
