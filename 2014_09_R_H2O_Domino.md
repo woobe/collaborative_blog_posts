@@ -1,148 +1,180 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.8*
+*version 0.9*
 
 <br>
 
 
 ### Introduction
 
-This blog post is the sequel to [TTTAR1 a.k.a. an introduction to H2O Deep Learning](http://bit.ly/bib_TTTAR1). If the previous blog post was a brief intro to H2O, this post is a proper machine learning case study based on a recent [Kaggle competition](https://www.kaggle.com/c/afsis-soil-properties). In short, I have (finally, yes, finally!) managed to achieve good performance for a real-world data mining contest by leveraging the power of R, H2O and Domino. 
+This blog post is the sequel to [TTTAR1 a.k.a. an introduction to H2O Deep Learning](http://bit.ly/bib_TTTAR1). If the previous blog post was a brief intro to H2O, this post is a proper machine learning case study based on a recent [Kaggle competition](https://www.kaggle.com/c/afsis-soil-properties). In short, I am leveraging the power of R, H2O and Domino to compete in a real-world data mining contest.
 
-(screenshot here)
+(screenshot here ... update later)
 
-Note that the public score is only based on a small subset (17%) of test data. My position on the final leaderboard might change dramatically, I'm trying my best to avoid the drop. In my opinion, climbing up the public leaderboard is just the baby step, making sure the models are generalised enough to stay up is the real challenge. Anyway, that is another topic for a future blog post. 
+Note that the public score is only based on a small subset (17%) of test data. My position on the final leaderboard might change dramatically. In my opinion, climbing up the public leaderboard is just the first step, making sure the models are generalised enough to stay up is the real challenge. Anyway, that is another topic for a future blog post. 
 
-The main purpose of this post is not about Kaggle competitions. It is more about finding a generic, robust, practical and scalable data analysis solution. A solution that I can rely on and apply to many of my machine learning problems in life. My experience with this R + H2O + Domino combination in the last couple weeks has been very promising. So I would like to use this opportunity to share with you my experience. Hopefully, this post will encourage more data geeks out there to give R, H2O and Domino a try if they haven't done so.
+<br>
 
-I always believe that learning-by-doing is the best way to learn. So here is a starter code pack for the Kaggle competition. So be prepared to get your hands dirty and craft your own Kaggle submission :) I will break the code down and explain each key steps in the following sections.
+#### Learning-by-Doing
 
-<br><br>
+I always believe that learning-by-doing is the best way to learn. So I have prepared two short tutorials with code below to get you started with Domino and H2O. Hopefully, by going through the tutorials, you will be able to master the basics and to try your own data analysis with the new tools. Moreover, if you follow the steps and run the code, you will get a CSV file that is ready for the Kaggle competition. 
+
+The purpose of this post is not only about Kaggle competitions. It is more about finding a generic, robust, practical and scalable data analysis solution. A solution that I can rely on and apply to many of my machine learning problems in life. My experience with this R + H2O + Domino combination in the last couple weeks has been very promising. So I would like to use this opportunity to share with you my experience. Hopefully, this post will encourage more data geeks out there to give R, H2O and Domino a try if they haven't done so.
+
+<br>
 
 #### What are H2O, Domino and Kaggle?
 
-Brief intro here ...
+T.B.C.
 
 <br><br>
 
 
 **************
 
-### Quick Start - Running the Starter Code on Domino Cloud
+### Tutorial One - Quick Start with Domino
 
-Intro ...
+In the first tutorial, I will only focus on the basic Domino operations via 
+Web UI and R interface. Although the R code is based on a Kaggle example using 
+H2O, it is hard to learn two new things at the same time. So I will leave the 
+H2O machine learning discussion for the next section. 
 
-<br><br>
-
-#### Step 1 - Sign up for a free Domino account
-
-URL here 
-(screenshot here)
+Ready? Let's go!
 
 <br><br>
 
-#### Step 2 - Install Domino Client for your OS
+#### Step 1 - Get Up and Running with Domino
 
-Install Client
-(screenshot here)
+<br>
 
-<br><br>> domino.run("Kaggle_AfSIS_with_H2O.R")
-  Determining which files are out of date...
+<center><img src="http://i.imgur.com/HAQkggc.png" alt="domino_website" style="width:640px"></center>
 
-No changes to upload to server, because you're up to date.
-Run for project woobe/quick-start started. You can view progress here: https://app.dominoup.com/woobe/quick-start#r/5419a889e4b062b695d962a9
+<br>
 
-
-#### Step 3 - Go through the tutorial (Optional)
-
-(screenshot here)
+If you haven't done so, [sign up](update link) for a free account on the site, 
+download and install the [client](update link). If you aren’t sure how to do this, 
+you can follow their [quick-start guide](update link).
 
 <br><br>
 
 
-#### Step 4 - Install and Load Domino's R Package
+#### Step 2 - R Interface for Domino
+
+Domino has its own [R package](update link) on CRAN. After installing the package, 
+you can log into your Domino account and manage your projects directly from R. 
+The Domino team has done a great job streamlining the whole process. Personally, 
+I think this is yet another excellent example of using R as an interface.
+
 
 ```
 install.packages("domino")
 library(domino)
-```
-
-<br><br>
-
-#### Step 5 - Login 
-
-```
 domino.login("your_username", "your_password")
 ```
 
 <br><br>
 
 
-#### Step 6 - Set working diectory to a folder of your choice
+#### Step 3 - Download Data and Code
 
-```
-setwd("your_working_dir") 
-```
+<br>
+
+<center><img src="http://i.imgur.com/g7Bk82B.png" alt="kaggle_data" style="width:640px"></center>
+
+<br>
+
+This tutorial is based on the Kaggle competition. In order to run the analysis,
+you will need to [download the original datasets](https://www.kaggle.com/c/afsis-soil-properties/data) 
+from Kaggle and this R script ("Kaggle_AfSIS_with_H2O.R")
+
 
 <br><br>
 
-#### Step 7 - Download the "quick-start" Project
 
-```
-domino.get("quick-start")
-```
+#### Step 4 - Upload Data and Code to Domino
 
-After that, you should have the following files
+You will need to upload the files to a specific project folder on Domino.
+To keep things simple, I will use the "quick-start" folder here because most of 
+you should have this folder somewhere on your local drive after going through 
+Domino's [quick start guide](update link).
 
-- results/
+On your machine, copy the datasets and R script to the 'quick-start' folder. The 
+file structure should look like this:
+
+**Before**
+
+- results /
 - main.m
 - main.py
 - main.r
 
-<br><br>
+**After**
 
-#### Step 8 - Upload the Kaggle AfSIS data and my R script
-
-Copy the data files and my R script to the folder
-
-- **data/train.zip**
-- **data/test.zip**
-- **data/sample_submission.csv**
-- results/
+- **data / train.zip** (*note*: create a new 'data' folder)
+- **data / test.zip**
+- **data / sample_submission.csv**
+- results /
 - **Kaggle_AfSIS_with_H2O.R**
 - main.m
 - main.py
 - main.r
 
+After that, you are ready to upload the files via R. 
+
 ```
+## Set Working Directory to the 'quick-start' folder
+setwd("quick_start_dir_on_your_local_drive") 
+```
+
+```
+## Upload new files to the 'quick-start' folder on Domino cloud
 domino.upload()
 ```
 
 <br><br>
 
-#### Step 9 - Check the files using Web UI
 
-(screenshot here)
+#### Step 5 - Check the Files
+
+<br>
+
+<center><img src="http://i.imgur.com/PRpk7ws.png" alt="kaggle_files" style="width:640px"></center>
+
+<br>
+
+Before running the analysis, check and make sure the files are on the cloud. 
+You can log into Domino's web UI and browse your files in the 'quick-start' folder.
+
 
 <br><br>
 
-#### Step 10 - Run the R Script (Two Options)
+#### Step 10 - Start a Run
 
-Option 1 - Web UI
+Great, you now are ready to run the analysis! There are two ways to do this:
+
+- Option One: Using the Web UI
+
+Runs -> Run -> enter of the name of the R script "Kaggle_AfSIS_with_H2O.R"
 
 (screenshot here)
 
-Option 2 - R
+- Option Two: Starting a Run directly from R
 
 ```
 domino.run("Kaggle_AfSIS_with_H2O.R")
 ```
 
+
 <br><br>
 
 
 #### Step 11 - Monitor the Process
+
+Domino has a neat Web UI for monitoring your runs online. 
+You can access to all your files and project settings panel on the left.
+When you click on any of your runs, it will display the native console 
+(R in this case) with a summary below showing CPU, memory usage and other stats.
 
 (screenshot here)
 
@@ -152,15 +184,21 @@ domino.run("Kaggle_AfSIS_with_H2O.R")
 
 #### Step 12 - Download the Results
 
-Email notification
+By default, you will receive an email notification once the run has finished. 
+There are more ways to customize notifcation but I will leave that for a future
+discussion (read more [here](update link) if you are interested).
 
 (screenshot here)
 
-Option 1 - Web UI
+After that, you can download the results (CSV for Kaggle submission) from the
+Web UI or via R.
 
 (screenshot here)
 
-Option 2 - R
+```
+## Download the results to your local drive
+domino.download()
+```
 
 <br><br>
 
@@ -251,7 +289,7 @@ raw_sub <- read.csv(path_submission)
 #### Step 4 - Train a Deep Neural Networks model for each variable
 ```
 ## Split the dataset into 80:20 for training and validation
-train_hex_split <- h2o.splitFrame(train_hex, ratios = c(0.8, 0.199), shuffle = TRUE)
+train_hex_split <- h2o.splitFrame(train_hex, ratios = 0.8, shuffle = TRUE)
 
 ## One Variable at at Time
 ls_label <- c("Ca", "P", "pH", "SOC", "Sand")
@@ -344,6 +382,13 @@ Try different settings at the same time
 **************
 
 ### Conclusions
+
+
+I think Domino is very user-friendly and flexible as you can use the web UI or write your own scripts to manage your Domino projects. Although the tutorials here are very R-centric, please remember that Domino also supports other programming langauges like Python and Matlab.
+
+Transferring files is free on Domino. The storage limit is about 30GB per project.
+
+
 
 1. Domino - On demand and scalable cloud service that is built for data scientists.
 2. H2O - highly efficient memory management and parallelised machine learning algorithms
