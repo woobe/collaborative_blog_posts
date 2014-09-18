@@ -1,7 +1,7 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.11*
+*version 0.12*
 
 <br>
 
@@ -51,7 +51,7 @@ H2O machine learning discussion for the next section.
 
 Ready? Let's go!
 
-<br><br>
+<br>
 
 #### Step 1.1 - Get Up and Running with Domino
 
@@ -63,10 +63,10 @@ you can follow their [quick-start guide](update link).
 
 <center><img src="http://i.imgur.com/HAQkggc.png" alt="domino_website" style="width:700px"></center>
 
-<br><br>
+<br>
 
 
-#### Step 1.2 - R Interface for Domino
+#### Step 1.2 - Install R Interface for Domino
 
 Domino has its own [R package](update link) on CRAN. After installing the package, 
 you can log into your Domino account and manage your projects directly from R. 
@@ -80,7 +80,7 @@ library(domino)
 domino.login("your_username", "your_password")
 ```
 
-<br><br>
+<br>
 
 
 #### Step 1.3 - Download Data and Code
@@ -93,7 +93,7 @@ from Kaggle and this R script ("Kaggle_AfSIS_with_H2O.R")
 
 <center><img src="http://i.imgur.com/cORfbVt.png" alt="kaggle_data" style="width:700px"></center>
 
-<br><br>
+<br>
 
 
 #### Step 1.4 - Upload Data and Code to Domino
@@ -113,6 +113,8 @@ file structure should look like this:
 - main.py
 - main.r
 
+<br>
+
 **After**
 
 - **data / train.zip** (*note*: create a new 'data' folder)
@@ -124,7 +126,7 @@ file structure should look like this:
 - main.py
 - main.r
 
-After that, you are ready to upload the files via R. 
+<br>
 
 ```
 ## Set Working Directory to the 'quick-start' folder
@@ -171,7 +173,7 @@ Alternatively, you can send the command directly from R.
 domino.run("Kaggle_AfSIS_with_H2O.R")
 ```
 
-<br><br>
+<br>
 
 
 #### Step 1.7 - Monitor the Process
@@ -185,7 +187,7 @@ When you click on any of your runs, it will display the native console
 
 <center><img src="http://i.imgur.com/sHyFswF.png" alt="kaggle_monitor" style="width:700px"></center>
 
-<br><br>
+<br>
 
 
 
@@ -201,8 +203,8 @@ discussion (read more [here](update link) if you are interested).
 
 <br>
 
-After that, you can download the results (CSV for Kaggle submission) from the
-Web UI ...
+The analysis takes about half an hour. After that, you can download the 
+results (CSV for Kaggle submission) either from the Web UI ...
 
 <br>
 
@@ -217,7 +219,7 @@ or via R.
 domino.download()
 ```
 
-<br><br>
+<br>
 
 
 #### Step 1.9 - Submit it to Kaggle (Optional)
@@ -225,7 +227,7 @@ domino.download()
 You can now go to the [submission page](https://www.kaggle.com/c/afsis-soil-properties/submissions/attach) 
 and upload the CSV file. Good luck :)
 
-<br><br>
+<br>
 
 
 
@@ -240,22 +242,28 @@ The problem
 5 targets to be predicted
 
 
+<br>
 
+#### Step 2.1 - Install R Interface for H2O
 
-<br><br>
+Again, R is acting as an interface. Having R as the common interface, 
+H2O and Domino can work together seamlessly. This is one of the key reasons why
+I found this R + H2O + Domino very promising.
 
-#### Step 2.1 - Install H2O
+You can install the CRAN Version of H2O:
 
-CRAN Version
 ```
 install.packages("h2o")
 ```
 
+<br>
 
-Bleeding Edge Version
+If you want to take advantages of the new H2O features,  
+you can install the bleeding edge version like this.
+
 ```
 ## Specify H2O version here
-h2o_ver <- "1510"
+h2o_ver <- "1511"
 
 ## Install H2O
 local({r <- getOption("repos"); r["CRAN"] <- "http://cran.us.r-project.org"; options(repos = r)})
@@ -265,41 +273,84 @@ txt_repo <- (c(paste0(paste0("http://s3.amazonaws.com/h2o-release/h2o/master/",
 install.packages("h2o", repos = txt_repo, quiet = TRUE)
 ```
 
-<br><br>
+<br>
+
+In order to find out the latest version number, go to [this page](http://s3.amazonaws.com/h2o-release/h2o/master/1511/index.html) and look for the last four digits in the version number as shown in screenshot below.
+
+<center><img src="http://i.imgur.com/VCuFIHO.png" alt="h2o_version" style="width:700px"></center>
+
+<br>
+
+To make your life easier, I wrote a wrapper function for this purpose. 
+To install or upgrade to the latest bleeding edge version of H2O, you only need
+two lines of code:
+
+```
+devtools::install_github("woobe/deepr")
+deepr::install_h2o()
+```
+
+<br>
 
 
-#### Step 2.2 - Initiate and Connect to a Local H2O Cluster on Domino
+#### Step 2.2 - Initiate and Connect to a Local H2O Cluster
+
+Using the argument "max_mem_size", we can control the physical memory allowance
+for the local H2O cluster. In this tutorial, we set a limit of 1GB of memory as 
+it is the maximum allowance of the Domino free tier.
 
 ```
 library(h2o)
 localH2O <- h2o.init(max_mem_size = '1g')
-
 ```
 
-<br><br>
+<br>
+
+<center><img src="http://i.imgur.com/xvJFVzA.png" alt="h2o_version" style="width:700px"></center>
+
+<br>
+
+In the next section, I will show you that it is very straight forward to scale up
+the data analysis (i.e. to run faster and/or to handle bigger datasets) by modifying
+this arugment and the Domino hardware tier setting.
+
+<br>
+
+
 
 #### Step 2.3 - Import Data
 
+Importing data is one of the best things I like about H2O! You can load compressed 
+files (.zip, .gz) directly to the H2O cluster. This may not be significantly important for the
+AfSIS Kaggle dataset but it is certainly useful for huge datasets in GBs.
+
 ```
-## Get the local path on Domino
-path_cloud <- getwd()
-
-## Define other paths
-path_train <- paste0(path_cloud, "/data/train.zip")
-path_test <- paste0(path_cloud, "/data/test.zip")
-path_submission <- paste0(path_cloud, "/data/sample_submission.csv")
-path_output <- paste0(path_cloud, "/results/my_Kaggle_submission.csv")
-
 ## Import Data to H2O Cluster
-train_hex <- h2o.importFile(localH2O, path = path_train)
-test_hex <- h2o.importFile(localH2O, path = path_test)
-raw_sub <- read.csv(path_submission)
-
+train_hex <- h2o.importFile(localH2O, "./data/train.zip")
+test_hex <- h2o.importFile(localH2O, "./data/test.zip")
 ```
 
-<br><br>
+<br>
 
-#### Step 2.4 - Train a Deep Neural Networks model for each variable
+
+#### Step 2.4 - Train Deep Neural Networks Models and Make Predictions
+
+Most of the (human processing) time in data analysis is about getting the data into the right format.
+I like H2O a lot because it handles large number of categorical variables and missing values out of the box.
+
+Of course, being a data scientist, you cannot only rely on automatic data pre-processing. 
+Especially for Kaggle competition, a lot of work is needed to investigate the data
+and to determine appropriate pre-processing tasks manually. Again, that will be a topic for future discussion.
+
+(Having said that, without any manual data pre-processing, I have managed to achieve
+very good performance using h2o.deeplearning(...) and simple models blending.)
+
+Without further ado, here is the code to train one deep neural networks model 
+for each target and then use the models to make predictions. For more information 
+about the h2o.deeplearning(...) function, I strongly recommend you to read the 
+[Vignette and Demo Code](https://github.com/0xdata/h2o/tree/master/docs/deeplearning/).
+
+
 ```
 ## Split the dataset into 80:20 for training and validation
 train_hex_split <- h2o.splitFrame(train_hex, ratios = 0.8, shuffle = TRUE)
@@ -332,46 +383,46 @@ for (n_label in 1:5) {
 }
 ```
 
-<br><br>
+<br>
+
 
 #### Step 2.5 - Save Results as a  CSV
+
+The final step is to save the predictions as a CSV file.
+
 ```
-write.csv(raw_sub, file = path_output, row.names = FALSE)
+write.csv(raw_sub, file = "./results/my_Kaggle_submission.csv", row.names = FALSE)
 ```
-<br><br>
 
-
-#### Other Machine Learning Algorithms in H2O
-
-NB, RF, GBM, GLM ... 
-
-<br><br>
-
-
-#### Other Key H2O Functions
-
-
-<br><br>
+<br>
 
 
 **************
 
 ### Scaling it up! 
 
-Run your analysis faster with Domino
+In the previous sections, I have walked you through a simple H2O machine learning
+exercise for Kaggle on the Domino cloud. The starter code should help you better
+understand the R + H2O + Domino combination. 
 
-- from 1 core to 32 cores
-- from 1GB Ram to 60GB Ram
+However, the simplicity of the model means you will not be able to achieve a very 
+good score on the Kaggle leaderboard. When you are ready to gear up your effort 
+for better performance, you will need to consider building more complex models 
+(e.g. more nodes per hidden layers).
 
-##### Step 1 - Change the Hardware Tier
+...
+
+<br>
+
+#### Step 3.1 - Modify your R script to include more complex modelling process
 
 (screenshot here)
 
+#### Step 3.2 - Choose a Domino hardware tier that suits your needs.
 
-##### Step 2 - Modify the R script slightly
+(screenshot here)
 
-
-Allocate more memory for the H2O cluster
+mory for the H2O cluster
 ```
 localH2O <- h2o.init(max_mem_size = '55g')
 ```
@@ -391,6 +442,38 @@ Try different settings at the same time
 (screenshot here)
 
 <br><br>
+
+
+**************
+
+### More about Domino and H2O
+
+H2O ....
+
+Domino ....
+
+<br>
+
+
+#### Other Cool Domino Features
+
+<br>
+
+
+#### Other Machine Learning Algorithms in H2O
+
+NB, RF, GBM, GLM ... 
+
+<br>
+
+
+#### Other Key H2O Functions
+
+
+<br>
+
+
+
 
 **************
 
