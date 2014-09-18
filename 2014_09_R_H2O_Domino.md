@@ -1,18 +1,33 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.10*
+*version 0.11*
 
 <br>
 
 
 ### Introduction
 
-This blog post is the sequel to [TTTAR1 a.k.a. an introduction to H2O Deep Learning](http://bit.ly/bib_TTTAR1). If the previous blog post was a brief intro to H2O, this post is a proper machine learning case study based on a recent [Kaggle competition](https://www.kaggle.com/c/afsis-soil-properties). In short, I am leveraging the power of R, H2O and Domino to compete in a real-world data mining contest.
+This blog post is the sequel to [TTTAR1 a.k.a. an introduction to H2O Deep Learning](http://bit.ly/bib_TTTAR1). If the previous blog post was a brief intro to H2O, this post is a proper machine learning case study based on a recent [Kaggle competition](https://www.kaggle.com/c/afsis-soil-properties). In short, I am leveraging the power of [R](http://www.r-project.org/), [H2O](http://h2o.ai/) and [Domino](http://www.dominoup.com/) to compete in a real-world data mining contest.
 
-(screenshot here ... update later)
+<br>
 
-Note that the public score is only based on a small subset (17%) of test data. My position on the final leaderboard might change dramatically. In my opinion, climbing up the public leaderboard is just the first step, making sure the models are generalised enough to stay up is the real challenge. Anyway, that is another topic for a future blog post. 
+<center><img src="http://i.imgur.com/S3x3d2O.png" alt="kaggle_topspot" style="width:700px"></center>
+
+<br>
+
+The competition got tougher since then but I am still very proud to say that at least I stayed top for a few days!
+Note that the public score is only based on a small subset (17%) of test data. My position on the final leaderboard might change dramatically. In my opinion, climbing up the public leaderboard is just the first step, making sure the models are generalized enough to stay up is the real challenge. Anyway, that is another topic for a future blog post. 
+
+<br>
+
+#### What are H2O, Domino and Kaggle?
+
+As described by [CrunchBase](http://www.crunchbase.com/) ...
+
+- [H2O](http://h2o.ai/) is an open-source math and in-memory prediction engine for big data science.
+- [Domino Data Lab](http://www.dominoup.com/) is a platform for analysts and data scientists that handles all the “plumbing” required to run, scale, share, and deploy analytical models.
+- [Kaggle](http://www.kaggle.com/) is a platform for predictive modeling and analytics competitions and consulting.
 
 <br>
 
@@ -20,13 +35,7 @@ Note that the public score is only based on a small subset (17%) of test data. M
 
 I always believe that learning-by-doing is the best way to learn. So I have prepared two short tutorials with code below to get you started with Domino and H2O. Hopefully, by going through the tutorials, you will be able to master the basics and to try your own data analysis with the new tools. Moreover, if you follow the steps and run the code, you will get a CSV file that is ready for the Kaggle competition. 
 
-The purpose of this post is not only about Kaggle competitions. It is more about finding a generic, robust, practical and scalable data analysis solution. A solution that I can rely on and apply to many of my machine learning problems in life. My experience with this R + H2O + Domino combination in the last couple weeks has been very promising. So I would like to use this opportunity to share with you my experience. Hopefully, this post will encourage more data geeks out there to give R, H2O and Domino a try if they haven't done so.
-
-<br>
-
-#### What are H2O, Domino and Kaggle?
-
-T.B.C.
+**The purpose of this post is not only about Kaggle competitions, it is more about finding a generic, robust, practical and scalable data analysis solution**. A solution that I can rely on and apply to many of my machine learning problems in life. My experience with this R + H2O + Domino combination in the last couple weeks has been very promising. So I would like to use this opportunity to share with you my experience. I realy hope that this post will encourage more data geeks out there to give R, H2O and Domino a try if they haven't done so.
 
 <br><br>
 
@@ -44,7 +53,7 @@ Ready? Let's go!
 
 <br><br>
 
-#### Step 1 - Get Up and Running with Domino
+#### Step 1.1 - Get Up and Running with Domino
 
 If you haven't done so, [sign up](update link) for a free account on the site, 
 download and install the [client](update link). If you aren’t sure how to do this, 
@@ -52,12 +61,12 @@ you can follow their [quick-start guide](update link).
 
 <br>
 
-<center><img src="http://i.imgur.com/HAQkggc.png" alt="domino_website" style="width:640px"></center>
+<center><img src="http://i.imgur.com/HAQkggc.png" alt="domino_website" style="width:700px"></center>
 
 <br><br>
 
 
-#### Step 2 - R Interface for Domino
+#### Step 1.2 - R Interface for Domino
 
 Domino has its own [R package](update link) on CRAN. After installing the package, 
 you can log into your Domino account and manage your projects directly from R. 
@@ -74,7 +83,7 @@ domino.login("your_username", "your_password")
 <br><br>
 
 
-#### Step 3 - Download Data and Code
+#### Step 1.3 - Download Data and Code
 
 This tutorial is based on the Kaggle competition. In order to run the analysis,
 you will need to [download the original datasets](https://www.kaggle.com/c/afsis-soil-properties/data) 
@@ -82,12 +91,12 @@ from Kaggle and this R script ("Kaggle_AfSIS_with_H2O.R")
 
 <br>
 
-<center><img src="http://i.imgur.com/g7Bk82B.png" alt="kaggle_data" style="width:640px"></center>
+<center><img src="http://i.imgur.com/cORfbVt.png" alt="kaggle_data" style="width:700px"></center>
 
 <br><br>
 
 
-#### Step 4 - Upload Data and Code to Domino
+#### Step 1.4 - Upload Data and Code to Domino
 
 You will need to upload the files to a specific project folder on Domino.
 To keep things simple, I will use the "quick-start" folder here because most of 
@@ -130,20 +139,20 @@ domino.upload()
 <br><br>
 
 
-#### Step 5 - Check the Files
+#### Step 1.5 - Check the Files
 
 Before running the analysis, check and make sure the files are on the cloud. 
 You can log into Domino's web UI and browse your files in the 'quick-start' folder.
 
 <br>
 
-<center><img src="http://i.imgur.com/PRpk7ws.png" alt="kaggle_files" style="width:640px"></center>
+<center><img src="http://i.imgur.com/PRpk7ws.png" alt="kaggle_files" style="width:700px"></center>
 
 <br><br>
 
 
 
-#### Step 10 - Start a Run
+#### Step 1.6 - Start a Run
 
 Great, you now are ready to run the analysis on the cloud! 
 There are two ways to do this.
@@ -152,7 +161,7 @@ You can use the Web UI to start a run (Runs -> Run -> Enter of the File Name-> S
 
 <br>
 
-<center><img src="http://i.imgur.com/s5V8XBr.png" alt="kaggle_startrun" style="width:640px"></center>
+<center><img src="http://i.imgur.com/s5V8XBr.png" alt="kaggle_startrun" style="width:700px"></center>
 
 <br>
 
@@ -165,7 +174,7 @@ domino.run("Kaggle_AfSIS_with_H2O.R")
 <br><br>
 
 
-#### Step 11 - Monitor the Process
+#### Step 1.7 - Monitor the Process
 
 Domino has a neat Web UI for monitoring your runs online. 
 You can access to all your files and project settings panel on the left.
@@ -174,13 +183,13 @@ When you click on any of your runs, it will display the native console
 
 <br>
 
-<center><img src="http://i.imgur.com/sHyFswF.png" alt="kaggle_monitor" style="width:640px"></center>
+<center><img src="http://i.imgur.com/sHyFswF.png" alt="kaggle_monitor" style="width:700px"></center>
 
 <br><br>
 
 
 
-#### Step 12 - Download the Results
+#### Step 1.8 - Download the Results
 
 By default, you will receive an email notification once the run has finished. 
 There are more ways to customize notifcation but I will leave that for a future
@@ -188,19 +197,20 @@ discussion (read more [here](update link) if you are interested).
 
 <br>
 
-<center><img src="http://i.imgur.com/gpHK8TK.png" alt="kaggle_monitor" style="width:640px"></center>
+<center><img src="http://i.imgur.com/gpHK8TK.png" alt="kaggle_monitor" style="width:700px"></center>
 
 <br>
 
 After that, you can download the results (CSV for Kaggle submission) from the
-Web UI or via R.
+Web UI ...
 
 <br>
 
-<center><img src="http://i.imgur.com/BYdgulM.png" alt="kaggle_monitor" style="width:640px"></center>
+<center><img src="http://i.imgur.com/BYdgulM.png" alt="kaggle_monitor" style="width:700px"></center>
 
 <br>
 
+or via R.
 
 ```
 ## Download the results to your local drive
@@ -210,16 +220,10 @@ domino.download()
 <br><br>
 
 
-#### Step 13 - Submit it to Kaggle (Optional)
+#### Step 1.9 - Submit it to Kaggle (Optional)
 
 You can now go to the [submission page](https://www.kaggle.com/c/afsis-soil-properties/submissions/attach) 
 and upload the CSV file. Good luck :)
-
-<br><br>
-
-#### More about Domino
-
-Other features ...
 
 <br><br>
 
@@ -227,13 +231,20 @@ Other features ...
 
 **************
 
-### Dig Deeper - Using H2O Deep Learning for Soil Property Predictions
+### Tutorial Two: Using H2O to Predict Soil Property
 
-Intro ....
+This section is about the 
+
+The problem
+3xxx predictors
+5 targets to be predicted
+
+
+
 
 <br><br>
 
-#### Step 1 - Install H2O
+#### Step 2.1 - Install H2O
 
 CRAN Version
 ```
@@ -257,7 +268,7 @@ install.packages("h2o", repos = txt_repo, quiet = TRUE)
 <br><br>
 
 
-#### Step 2 - Initiate and Connect to a Local H2O Cluster on Domino
+#### Step 2.2 - Initiate and Connect to a Local H2O Cluster on Domino
 
 ```
 library(h2o)
@@ -267,7 +278,7 @@ localH2O <- h2o.init(max_mem_size = '1g')
 
 <br><br>
 
-#### Step 3 - Import Data
+#### Step 2.3 - Import Data
 
 ```
 ## Get the local path on Domino
@@ -288,7 +299,7 @@ raw_sub <- read.csv(path_submission)
 
 <br><br>
 
-#### Step 4 - Train a Deep Neural Networks model for each variable
+#### Step 2.4 - Train a Deep Neural Networks model for each variable
 ```
 ## Split the dataset into 80:20 for training and validation
 train_hex_split <- h2o.splitFrame(train_hex, ratios = 0.8, shuffle = TRUE)
@@ -323,14 +334,14 @@ for (n_label in 1:5) {
 
 <br><br>
 
-#### Step 5 - Save Results as a  CSV
+#### Step 2.5 - Save Results as a  CSV
 ```
 write.csv(raw_sub, file = path_output, row.names = FALSE)
 ```
 <br><br>
 
 
-#### H2O Machine Learning Algorithms
+#### Other Machine Learning Algorithms in H2O
 
 NB, RF, GBM, GLM ... 
 
