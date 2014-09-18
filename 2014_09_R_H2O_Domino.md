@@ -1,7 +1,7 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.9*
+*version 0.10*
 
 <br>
 
@@ -46,15 +46,13 @@ Ready? Let's go!
 
 #### Step 1 - Get Up and Running with Domino
 
-<br>
-
-<center><img src="http://i.imgur.com/HAQkggc.png" alt="domino_website" style="width:640px"></center>
-
-<br>
-
 If you haven't done so, [sign up](update link) for a free account on the site, 
 download and install the [client](update link). If you aren’t sure how to do this, 
 you can follow their [quick-start guide](update link).
+
+<br>
+
+<center><img src="http://i.imgur.com/HAQkggc.png" alt="domino_website" style="width:640px"></center>
 
 <br><br>
 
@@ -78,16 +76,13 @@ domino.login("your_username", "your_password")
 
 #### Step 3 - Download Data and Code
 
-<br>
-
-<center><img src="http://i.imgur.com/g7Bk82B.png" alt="kaggle_data" style="width:640px"></center>
-
-<br>
-
 This tutorial is based on the Kaggle competition. In order to run the analysis,
 you will need to [download the original datasets](https://www.kaggle.com/c/afsis-soil-properties/data) 
 from Kaggle and this R script ("Kaggle_AfSIS_with_H2O.R")
 
+<br>
+
+<center><img src="http://i.imgur.com/g7Bk82B.png" alt="kaggle_data" style="width:640px"></center>
 
 <br><br>
 
@@ -137,34 +132,35 @@ domino.upload()
 
 #### Step 5 - Check the Files
 
+Before running the analysis, check and make sure the files are on the cloud. 
+You can log into Domino's web UI and browse your files in the 'quick-start' folder.
+
 <br>
 
 <center><img src="http://i.imgur.com/PRpk7ws.png" alt="kaggle_files" style="width:640px"></center>
 
-<br>
-
-Before running the analysis, check and make sure the files are on the cloud. 
-You can log into Domino's web UI and browse your files in the 'quick-start' folder.
-
-
 <br><br>
+
+
 
 #### Step 10 - Start a Run
 
-Great, you now are ready to run the analysis! There are two ways to do this:
+Great, you now are ready to run the analysis on the cloud! 
+There are two ways to do this.
 
-- Option One: Using the Web UI
+You can use the Web UI to start a run (Runs -> Run -> Enter of the File Name-> Start Run).
 
-Runs -> Run -> enter of the name of the R script "Kaggle_AfSIS_with_H2O.R"
+<br>
 
-(screenshot here)
+<center><img src="http://i.imgur.com/s5V8XBr.png" alt="kaggle_startrun" style="width:640px"></center>
 
-- Option Two: Starting a Run directly from R
+<br>
+
+Alternatively, you can send the command directly from R.
 
 ```
 domino.run("Kaggle_AfSIS_with_H2O.R")
 ```
-
 
 <br><br>
 
@@ -176,7 +172,9 @@ You can access to all your files and project settings panel on the left.
 When you click on any of your runs, it will display the native console 
 (R in this case) with a summary below showing CPU, memory usage and other stats.
 
-(screenshot here)
+<br>
+
+<center><img src="http://i.imgur.com/sHyFswF.png" alt="kaggle_monitor" style="width:640px"></center>
 
 <br><br>
 
@@ -188,12 +186,21 @@ By default, you will receive an email notification once the run has finished.
 There are more ways to customize notifcation but I will leave that for a future
 discussion (read more [here](update link) if you are interested).
 
-(screenshot here)
+<br>
+
+<center><img src="http://i.imgur.com/gpHK8TK.png" alt="kaggle_monitor" style="width:640px"></center>
+
+<br>
 
 After that, you can download the results (CSV for Kaggle submission) from the
 Web UI or via R.
 
-(screenshot here)
+<br>
+
+<center><img src="http://i.imgur.com/BYdgulM.png" alt="kaggle_monitor" style="width:640px"></center>
+
+<br>
+
 
 ```
 ## Download the results to your local drive
@@ -203,24 +210,19 @@ domino.download()
 <br><br>
 
 
-#### Step 13 - Submit it to Kaggle
+#### Step 13 - Submit it to Kaggle (Optional)
 
-
-(screenshot here)
-
-<br><br>
-
-#### Share your project folder
-
-(screenshot here)
+You can now go to the [submission page](https://www.kaggle.com/c/afsis-soil-properties/submissions/attach) 
+and upload the CSV file. Good luck :)
 
 <br><br>
 
-#### Other Cool Stuff
+#### More about Domino
 
-(screenshot here)
+Other features ...
 
 <br><br>
+
 
 
 **************
