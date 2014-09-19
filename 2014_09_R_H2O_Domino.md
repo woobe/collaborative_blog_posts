@@ -596,7 +596,7 @@ understand H2O, they have been emailing me tips and information about H2O as wel
 as encouraging me to push the boundaries. Especially [Arno Candel](https://twitter.com/ArnoCandel) 
 who gave me some very specific advice on fine-tuning ```h2o.deeplearning``` and other functions.
 
-I hope you find this post useful. If you decide to give this a R + H2O + Domino 
+I hope you find this post useful. If you decide to give this R + H2O + Domino 
 combination a try but have questions regarding the set up, feel free to 
 [email](mailto:jofai.chow@gmail.com) / [tweet](https://twitter.com/matlabulous) me 
 as well as the Domino and Oxdata team. I know your questions and feedback will 
