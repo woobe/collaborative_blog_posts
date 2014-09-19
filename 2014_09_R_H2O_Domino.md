@@ -1,7 +1,7 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.17 - nearly complete first draft*
+*version 0.18 - nearly there*
 
 <br>
 
@@ -422,8 +422,8 @@ for (n_label in 1:5) {
 
 #### Step 2.5 - Save Results as a  CSV
 
-The final step is to save all predictions as a CSV file.
-
+The final step is to save all predictions as a CSV file. This is the CSV file
+in the correct Kaggle submission format. 
 ```
 write.csv(raw_sub, file = "./results/my_Kaggle_submission.csv", row.names = FALSE)
 ```
@@ -507,24 +507,21 @@ take care of the rest.
 
 **************
 
-### More about Domino and H2O
-
-T.B.C.
-
-<br><br>
-
-**************
-
 ### Conclusions
 
-T.B.C.
+If I have to summarize this experience, I would say that the discovery of this 
+R + H2O + Domino combination has been very exciting and promising! 
+I am now very confident to say that I have a practical and scalable solution to 
+deal with not just Kaggle but many other machine learning problems I have in life.
+I also know that this solution can get even better! I will continue to explore and
+experiment with other tools.
 
 <br><br>
 
 
 **************
 
-### What's Next?
+### It Isn't Just About the Tools. It Is More About the People!
 
 T.B.C.
 
@@ -532,9 +529,11 @@ T.B.C.
 
 **************
 
-### Acknowledgement
+### All the Links
 
-**Note**: I don't want to miss any of you here. If you gonna check one thing, check this section :)
+It's quite a lengthy post so let me summarize all the external resources again here:
 
-<br><br>
+- xxx
+- xxx
+- xxx
 
