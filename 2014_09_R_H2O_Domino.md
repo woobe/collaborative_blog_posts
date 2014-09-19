@@ -1,7 +1,7 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.20 - proofreading x 1 time*
+*version 1.00 - Joe passing the ball to Nick*
 
 <br>
 
@@ -28,7 +28,7 @@ understanding the problem better and identifying the best strategies sooner
 than your opponents. Having the ability to ask the data many questions at the 
 same time is very crucial. 
 
-In practice, that means I can reduce days or even weeks of analysis to just a few hours.
+In practice, that means I can cut down days or even weeks of analysis to just a few hours.
 Using Domino, I can quickly evaluate many different machine learning strategies 
 for the Kaggle contest. On top of that, I don't have to waste any time on infrastructure 
 setup and hardware maintenance. Domino simply takes care of the rest. This really 
@@ -44,7 +44,7 @@ To say that I am very impressed with the predictive performance of the
 [H2O deep learning module](https://github.com/0xdata/h2o/tree/master/docs/deeplearning/) 
 is an understatement. All data geeks know about the 
 [“No Free Lunch” theorem](http://www.statsblogs.com/2014/01/25/machine-learning-lesson-of-the-day-the-no-free-lunch-theorem/). 
-Yet, againist all my previous experience, I have managed to climb up the ladder 
+Yet, againist all odds and my past experience, I have managed to climb up the ladder 
 using just the ```h2o.deeplearning``` algorithm and some simple model 
 averaging strategies.
 
@@ -100,7 +100,7 @@ Source: [CrunchBase](http://www.crunchbase.com/)
 
 #### Ready?
 
-OK, that's quite enough for an intro. Ready to get your hands dirty? ***Let's dive into it!!!***
+OK, that's quite enough for an intro. ***Let's dive into it!!!***
 
 <br><br>
 
@@ -592,9 +592,9 @@ Then, of course, is the [Oxdata team](http://0xdata.com/about/) ([Sri Ambati](ht
 [Arno Candel](https://twitter.com/ArnoCandel), Viraj Parmar, Cliff Click, Kevin Normoyle, 
 [Raymond Peck](https://twitter.com/raymondpeck3), Spencer Aiello and many others) 
 behind the H2O engine. Since the early days when I began taking my baby steps to 
-understand H2O, they have been providing me tips and information about H2O as well 
-as encouraging me to push the boundaries. Especially Arno who gave me some very 
-specific advice on fine-tuning ```h2o.deeplearning``` and other functions.
+understand H2O, they have been emailing me tips and information about H2O as well 
+as encouraging me to push the boundaries. Especially [Arno Candel](https://twitter.com/ArnoCandel) 
+who gave me some very specific advice on fine-tuning ```h2o.deeplearning``` and other functions.
 
 I hope you find this post useful. If you decide to give this a R + H2O + Domino 
 combination a try but have questions regarding the set up, feel free to 
@@ -604,8 +604,6 @@ help them evolve and shape even better products for data science. Unfortunately,
 I need to follow Kaggle competition rules and I can't tell you exactly 
 what I do to climb up the leaderboard. Yet, you can pretty much guess it from the 
 name of my blog "[Blend It Like a Bayesian!](http://bit.ly/blenditbayes)".
-
-<br><br>
 
 I afraid I can't cover everything in one post but I will continue to blog about 
 other cool Domino and H2O features in the coming months.
