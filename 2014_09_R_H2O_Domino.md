@@ -1,7 +1,7 @@
 Using R, H2O and Domino for Practical and Scalable Data Analysis
 ===============
 
-*version 0.16 - almost done*
+*version 0.17 - nearly complete first draft*
 
 <br>
 
@@ -14,27 +14,71 @@ This blog post is the sequel to [TTTAR1 a.k.a. An Introduction to H2O Deep Learn
 <br>
 
 The competition got tougher since then but I am still very proud to say that at least I stayed top for a few days!
-Note that the public score is only based on a small subset (17%) of test data. My position on the final leaderboard might change dramatically. In my opinion, climbing up the public leaderboard is just the first step, making sure the models are generalized enough to stay up is the real challenge. Anyway, that is another topic for a future blog post. 
+Note that the public score is only based on a small subset (17%) of test data. My position on the final leaderboard might change dramatically. In my opinion, climbing up the public leaderboard is just the first step, making sure the models are generalized enough to stay up is the real challenge. Anyway, that is another topic for a future blog post.
 
-The purpose of this post is not only about Kaggle competitions, **it is more about finding a practical and scalable data analysis solution**. A solution that I can rely on and apply to many of my machine learning problems in life. My experience with this R + H2O + Domino combination in the last couple weeks has been very promising. So I would like to use this opportunity to share with you my experience. I realy hope that this post will encourage more data geeks out there to give R, H2O and Domino a try if they haven't done so.
+<br>
+
+#### Accelerate Your Data Analysis with Domino
+
+I think it is fair to say that Kaggle contests are very challenging. Even more 
+so when you put the time constraint into the mix. Using Domino, I can easily scale
+up my analysis, take advantages of the parallelized code and carry out many tests 
+within a very short space of time. Competing in a data mining contest is all about 
+understanding the problem better and identifying the best modeling strategies as
+soon as you can. The ability to ask the data many questions at the same time is crucial. 
+
+In practice, that means I can reduce days or even weeks of analysis to hours.
+Using Domino, I can quickly evaluate different modeling strategies and effectively 
+improve my model performance over time. On top of that, I don't have to waste any
+time on infrastructure set up and maintenance. Domino simply takes care of the rest.
+
+<br>
+
+#### Go Deeper with H2O
+
+I am very impressed with the predictive performance of H2O deep learning module.
+All data geeks know about the [“No Free Lunch” theorem](http://www.statsblogs.com/2014/01/25/machine-learning-lesson-of-the-day-the-no-free-lunch-theorem/). Yet, againist all my previous experience, I have managed to climb up the Kaggle 
+leaderboard using just the ```h2o.deeplearning(...)``` algorithm and some simple 
+model averaging strategies.
+
+Performance is not the only thing, H2O's highly efficient memory management and 
+parallelized algorithms are just as amazing. It got even better when I realized 
+that I can use H2O with Domino. At that moment, I knew I had found a very 
+promising machine learning solution and hence the motivation of this blog post.
+
+<br>
+
+#### About this Blog Post
+
+The purpose of this post is not only about Kaggle competitions, **it is more about finding a practical and scalable data analysis solution**. A generic and robust solution that I can rely on and apply to many of my machine learning problems in life. My experience with this R + H2O + Domino combination in the last couple weeks has been very promising. So I would like to use this opportunity to share with you my experience. I realy hope that this post will encourage more data geeks out there to give R, H2O and Domino a try if they haven't done so.
+
+Using H2O alone can be a huge topic. In order to keep things simple, 
+I will just walk you through the simple starter code here. I promise you that there 
+will be a more in-depth discussion on various machine learning algorithms and strategies 
+after the contest. I also hope that these blog posts can eventually evolve 
+into proper tutorials (as my tiny contribution to the data science communitiy). 
 
 <br>
 
 #### Learning-by-Doing
 
-I always believe that learning-by-doing is the best way to learn. So I have prepared **two short tutorials** below to get you started with Domino and H2O. Hopefully, by going through the tutorials, you will be able to master the basics and to try your own data analysis with the new tools. Moreover, if you follow all the steps and run the analysis yourself, you will get a CSV file that is ready for the Kaggle competition.
+I always believe that learning-by-doing is the best way to learn. So I have prepared **two short tutorials with starter code** below to get you started with Domino and H2O. Hopefully, by going through the tutorials, you will be able to master the basics and to try H2O and Domino for your own data analysis very soon. Moreover, if you follow all the steps, you will get a CSV file that is ready for the Kaggle competition. Lastly, when you are ready to up your game, check out the **third tutorial** about scaling up your analysis in just a few easy steps. 
 
 <br>
 
-#### H2O, Domino and Kaggle?
+#### Wait ... Who Are They?
 
 Just in case you haven't heard of them yet ...
 
-- [H2O](http://h2o.ai/) is an open-source math and in-memory prediction engine for big data science.
-- [Domino Data Lab](http://www.dominoup.com/) is a platform for analysts and data scientists that handles all the “plumbing” required to run, scale, share, and deploy analytical models.
+- [H2O](http://h2o.ai/) is an open-source math and in-memory prediction engine for big data science developed by [0xdata](http://0xdata.com/).
+- [Domino](http://www.dominoup.com/) is a platform for analysts and data scientists that handles all the “plumbing” required to run, scale, share, and deploy analytical models.
 - [Kaggle](http://www.kaggle.com/) is a platform for predictive modeling and analytics competitions and consulting.
 
 Source: [CrunchBase](http://www.crunchbase.com/)
+
+<br>
+
+OK, that's quite enough for an intro. Ready to get your hands dirty? **Let's dive into it!!!**
 
 <br><br>
 
@@ -45,11 +89,7 @@ Source: [CrunchBase](http://www.crunchbase.com/)
 In the first tutorial, I will only focus on the basic Domino operations via 
 their web UI and R interface. Although the R script is all about H2O machine learning, 
 it is hard to learn two new things at the same time. So I will keep this simple
-and leave the machine learning discussion for the next tutorial.
-
-<br>
-
-#### Ready? Here we go!!
+and leave the H2O discussion for the next tutorial.
 
 <br>
 
@@ -231,6 +271,18 @@ files and runs. For example, see my ```quick-start``` project [here](https://app
 
 <center><img src="http://i.imgur.com/FpqM9Nj.png" alt="kaggle_monitor" style="width:300px"></center>
 
+<br>
+
+#### Version Control
+
+The version control on Domino is a well-thought process specially designed for
+data scientists. Instead of versioning individual files one at a time, Domino
+creates snapshots of your data, code and results altogether. That means it is very
+easy to go back in time and make reference to a particular run with the exact data 
+and code used.
+
+<center><img src="http://i.imgur.com/hCUvJWR.png" alt="kaggle_monitor" style="width:300px"></center>
+
 <br><br>
 
 **************
@@ -312,7 +364,7 @@ localH2O <- h2o.init(max_mem_size = '1g')
 #### Step 2.3 - Import Data
 
 Importing data is one of the best things I like about H2O!!! You can load compressed 
-files (.zip, .gz) directly into the H2O cluster. This may not be significantly 
+files (```.zip```, ```.gz```) directly into the H2O cluster. This may not be significantly 
 important for the small Kaggle dataset in this tutorial but it is certainly useful 
 for bigger datasets.
 
@@ -385,12 +437,23 @@ That's it! You have just trained some Deep Neural Networks models and used them
 for prediction! Why don't you try the same thing on other datasets? For example,
 the [Breast Cancer and MNIST datasets I used in the previous TTTAR blog post](http://bit.ly/bib_TTTAR1).
 
+<br>
+
+#### Try Other H2O Machine Learning Algorithms
+
+```h2o.deeplearning``` is just one of the algorithms available in H2O. You
+can also try ```h2o.gbm```, ```h2o.glm```, ```h2o.naiveBayes```, 
+```h2o.randomForest``` and more. All these functions can be called directly from
+R like the code example above. They have similar syntax so it
+should be very straight forward. For more information, the 
+[H2O tutorial](http://docs.0xdata.com/tutorial/top.html) is a great place to start with.
+
 <br><br>
 
 
 **************
 
-### Scaling Up Your Data Analysis!
+### Tutorial Three - Scaling Up Your Data Analysis!
 
 I have walked you through a simple H2O machine learning exercise for Kaggle on 
 the Domino cloud. I hope the starter code and tutorials can help you better
@@ -399,7 +462,7 @@ means you will not be able to achieve a very good score on the Kaggle leaderboar
 
 When you are ready to gear up your effort (e.g. building more complex models) or
 analyse much bigger datasets, you can easily scale up your data analysis on Domino 
-in a just few steps.
+in a just few steps. Ready? Read on!
 
 <br>
 
@@ -434,9 +497,10 @@ localH2O <- h2o.init(max_mem_size = '25g')
 #### Use Multiple Instances
 
 To further increase productivity, you can start multiple runs at the same time.
+Again, no complex set up is required. Just start your runs as usual. Domino will
+take care of the rest.
 
 <center><img src="http://i.imgur.com/AYIriLr.png" alt="domino_hardware" style="width:400px"></center>
-
 
 <br><br>
 
@@ -448,15 +512,6 @@ To further increase productivity, you can start multiple runs at the same time.
 T.B.C.
 
 <br><br>
-
-**************
-
-### A List of All Key Resources
-
-T.B.C.
-
-<br><br>
-
 
 **************
 
